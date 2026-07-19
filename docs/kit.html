@@ -48,13 +48,6 @@
     display:flex; align-items:center; gap:9px; }
   .kit .box.accent h4{ color:var(--orange); } .kit .box.good h4{ color:var(--good); }
   .kit .box p:last-child{ margin-bottom:0; }
-  .kit .bottomline{ display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line-2);
-    border-radius:4px; overflow:hidden; margin:8px 0 4px; }
-  .kit .bottomline > div{ background:var(--surface); padding:22px 24px; }
-  .kit .bottomline .tl{ font-family:var(--font-mono); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--zinc); margin-bottom:10px; }
-  .kit .bottomline .big{ font-family:var(--font-disp); font-weight:800; font-size:clamp(26px,3.4vw,40px); line-height:1; }
-  .kit .bottomline .kill .big{ color:var(--good); } .kit .bottomline .keep .big{ color:var(--amber); }
-  .kit .bottomline p{ margin:12px 0 0; font-size:14px; color:var(--ink-dim); }
   .kit .tbl{ width:100%; border-collapse:collapse; margin:18px 0; font-size:14.5px; border:1px solid var(--line-2); }
   .kit .tbl th{ text-align:left; font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.12em; text-transform:uppercase;
     color:var(--zinc); background:var(--surface-2); padding:12px 16px; border-bottom:1px solid var(--line); }
@@ -96,7 +89,20 @@
     margin:0 0 60px; line-height:1.6; opacity:.85; }
   @media (max-width:860px){
     .kit .doc-grid{ grid-template-columns:1fr; } .kit nav.toc{ position:static; display:none; }
-    .kit .bottomline{ grid-template-columns:1fr; } .kit .pagelinks{ grid-template-columns:1fr; }
+    .kit .pagelinks{ grid-template-columns:1fr; }
+  }
+  @media print{
+    :root, :root[data-theme="dark"], :root[data-theme="light"]{
+      --graphite:#fff; --steel:#fff; --steel-2:#f2f2f2; --line:#ccc; --line-2:#999;
+      --zinc:#555; --ink:#000; --ink-dim:#222; --orange:#b45309; --amber:#7a5200; --good:#166534;
+      --hero-grid:transparent; }
+    header, footer, nav.toc, .cb-h button{ display:none !important; }
+    body{ background:#fff; font-size:12.5px; }
+    .kit .doc-grid{ grid-template-columns:1fr; gap:0; padding:8px 0 24px; }
+    section.kblk{ margin-bottom:28px; }
+    .kit .box, .kit ol.steps li, .kit .tbl tr, .kit ul.check li{ break-inside:avoid; }
+    .kblk a[href^="http"]::after{ content:" (" attr(href) ")"; font-family:var(--font-mono);
+      font-size:10px; color:#555; }
   }
 </style>
 <main class="kit">
@@ -122,16 +128,15 @@
   <nav class="toc" aria-label="Contents">
     <div class="th">Contents</div>
     <a href="#work"><span class="n">01</span>Who does what</a>
-    <a href="#split"><span class="n">02</span>One-time vs. forever</a>
-    <a href="#shipping"><span class="n">03</span>Shipping by country</a>
-    <a href="#payments"><span class="n">04</span>Stripe + bank transfer</a>
-    <a href="#orders"><span class="n">05</span>Handling an order</a>
-    <a href="#products"><span class="n">06</span>Products &amp; prices</a>
-    <a href="#content"><span class="n">07</span>Pages &amp; content</a>
-    <a href="#install"><span class="n">08</span>The one-time install</a>
-    <a href="#hire"><span class="n">09</span>Hiring for it (fixed price)</a>
-    <a href="#golive"><span class="n">10</span>Go-live checklist</a>
-    <a href="#truth"><span class="n">11</span>What still needs a dev</a>
+    <a href="#shipping"><span class="n">02</span>Shipping by country</a>
+    <a href="#payments"><span class="n">03</span>Payments</a>
+    <a href="#orders"><span class="n">04</span>Handling an order</a>
+    <a href="#products"><span class="n">05</span>Products &amp; prices</a>
+    <a href="#content"><span class="n">06</span>Pages &amp; content</a>
+    <a href="#install"><span class="n">07</span>The one-time install</a>
+    <a href="#hire"><span class="n">08</span>Hiring for it (fixed price)</a>
+    <a href="#golive"><span class="n">09</span>Go-live checklist</a>
+    <a href="#truth"><span class="n">10</span>What still needs a dev</a>
   </nav>
 
   <div>
@@ -140,29 +145,8 @@
       <p>Almost everything a shop like yours needs done month to month -- change a shipping price,
         add a product, edit a page, turn on a payment method -- is built into Craft Commerce and
         meant to be done by the owner, from the admin screen, with no code.</p>
-      <p>The work that genuinely needs a developer is one-time (installing the new design) or
-        occasional (security updates a few times a year). Both can be bought as fixed jobs or a
-        small hourly arrangement.</p>
-      <div class="bottomline">
-        <div class="kill">
-          <div class="tl">You do yourselves</div>
-          <div class="big">The routine</div>
-          <p>Shipping edits, product changes, price updates, content, payment settings, order
-            handling -- all done from the control panel in minutes.</p>
-        </div>
-        <div class="keep">
-          <div class="tl">You pay for</div>
-          <div class="big">Hosting + hours</div>
-          <p>Web hosting (you already pay this), and a handful of maintenance hours a year for
-            updates.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="kblk" id="split">
-      <div class="sh"><span class="n">02</span><h2>One-time vs. forever</h2></div>
-      <p>The honest split between what you do yourselves from now on and the short list a developer
-        touches once.</p>
+      <p>The short list that genuinely needs a developer is one-time or occasional; section 10 spells
+        it out honestly. The split looks like this:</p>
       <div class="scroll"><table class="tbl">
         <thead><tr><th>Task</th><th>Who does it</th><th>How often</th></tr></thead>
         <tbody>
@@ -179,7 +163,7 @@
     </section>
 
     <section class="kblk" id="shipping">
-      <div class="sh"><span class="n">03</span><h2>Shipping by country</h2></div>
+      <div class="sh"><span class="n">02</span><h2>Shipping by country</h2></div>
       <p>Craft Commerce charges different shipping prices to different countries out of the box.
         You build <strong>zones</strong> (groups of countries) and <strong>rules</strong> (the
         price for each zone, which can vary by weight). No plugin, no code -- it only needs to be
@@ -198,24 +182,24 @@
         <thead><tr><th>Zone</th><th>Countries (examples)</th><th class="num">Standard</th><th class="num">Express</th></tr></thead>
         <tbody>
           <tr><td>Pickup</td><td>Collect at workshop</td><td class="num yes">FREE</td><td class="num">--</td></tr>
-          <tr><td>Zone 1</td><td>Netherlands</td><td class="num">&euro;14,95</td><td class="num">&euro;34,95</td></tr>
-          <tr><td>Zone 2</td><td>Belgium, Germany, France</td><td class="num">&euro;39,95</td><td class="num">&euro;59,95</td></tr>
-          <tr><td>Zone 3</td><td>Spain, Italy, Poland</td><td class="num">&euro;49,95</td><td class="num">&euro;79,95</td></tr>
-          <tr><td>Zone 4</td><td>UK, Switzerland, Norway</td><td class="num">&euro;59,95</td><td class="num">&euro;89,95</td></tr>
-          <tr><td>Zone 5</td><td>United States, Canada</td><td class="num">&euro;119,95</td><td class="num">&euro;189,95</td></tr>
+          <tr><td>Zone 1</td><td>Netherlands</td><td class="num">&euro;14.95</td><td class="num">&euro;34.95</td></tr>
+          <tr><td>Zone 2</td><td>Belgium, Germany, France</td><td class="num">&euro;39.95</td><td class="num">&euro;59.95</td></tr>
+          <tr><td>Zone 3</td><td>Spain, Italy, Poland</td><td class="num">&euro;49.95</td><td class="num">&euro;79.95</td></tr>
+          <tr><td>Zone 4</td><td>UK, Switzerland, Norway</td><td class="num">&euro;59.95</td><td class="num">&euro;89.95</td></tr>
+          <tr><td>Zone 5</td><td>United States, Canada</td><td class="num">&euro;119.95</td><td class="num">&euro;189.95</td></tr>
         </tbody>
       </table></div>
       <div class="box">
         <h4>Want live FedEx / DPD prices instead of a table?</h4>
-        <p>A free plugin called <strong>Postie</strong> pulls real-time quotes straight from FedEx,
-          UPS, PostNL and DPD at checkout, based on the parcel size and destination. It's optional --
-          the zone table above works on its own. If you want it, it goes on the one-time install
-          list in section 08.</p>
+        <p>A paid plugin called <strong>Postie</strong> (about $79 once, plus a smaller yearly
+          renewal) pulls real-time quotes straight from FedEx, UPS, PostNL and DPD at checkout,
+          based on the parcel size and destination. It's optional -- the zone table above works on
+          its own. If you want it, it goes on the one-time install list in section 07.</p>
       </div>
     </section>
 
     <section class="kblk" id="payments">
-      <div class="sh"><span class="n">04</span><h2>Stripe, iDEAL, and bank transfer</h2></div>
+      <div class="sh"><span class="n">03</span><h2>Stripe, iDEAL, and bank transfer</h2></div>
       <p>Three payment methods cover almost every customer you have: card and iDEAL through Stripe,
         and manual bank transfer for pickup orders. All three live under
         <span class="mono" style="color:var(--amber)">Commerce &rarr; Settings &rarr; Gateways</span>.</p>
@@ -232,8 +216,16 @@
       <div class="box good">
         <h4>What Stripe costs</h4>
         <p>No monthly fee. Stripe takes a small percentage per sale (roughly 1.5% + &euro;0.25 on
-          European cards; iDEAL is a few cents flat). You keep the rest. Payouts land in your bank
-          automatically.</p>
+          European cards; iDEAL is a flat fee of about &euro;0.29). You keep the rest. Payouts land
+          in your bank automatically.</p>
+      </div>
+      <div class="box">
+        <h4>Prefer a Dutch provider? Mollie works too</h4>
+        <p><strong>Mollie</strong> does the same job -- cards and iDEAL, no monthly fee, iDEAL at
+          a flat fee of about &euro;0.29 -- and Craft's makers publish a free, first-party Mollie
+          gateway plugin. If you already have a Mollie account, use it: the setup is the same shape
+          (make the account, paste the API key into the gateway). Pick one of the two; there is no
+          need to run both.</p>
       </div>
       <h3 class="sub">Bank transfer -- for pickups and big orders</h3>
       <p>Craft Commerce has a built-in <strong>Manual</strong> gateway for offline payment. This is
@@ -247,7 +239,7 @@
       </ol>
       <div class="box accent">
         <h4>The pickup charge, handled cleanly</h4>
-        <p>When a customer chooses workshop pickup, the free "Pickup" shipping method (section 03)
+        <p>When a customer chooses workshop pickup, the free "Pickup" shipping method (section 02)
           already sets shipping to zero -- so there is no delivery line to strike off the invoice by
           hand. If an order slips through with shipping on it, you can still edit the order and
           remove the charge before sending the payment link.</p>
@@ -255,7 +247,7 @@
     </section>
 
     <section class="kblk" id="orders">
-      <div class="sh"><span class="n">05</span><h2>Handling an order, start to finish</h2></div>
+      <div class="sh"><span class="n">04</span><h2>Handling an order, start to finish</h2></div>
       <p>Every order lands under <span class="mono" style="color:var(--amber)">Commerce &rarr; Orders</span>.
         Here is the pickup + bank-transfer case, which is your most common one.</p>
       <ol class="steps">
@@ -273,7 +265,7 @@
     </section>
 
     <section class="kblk" id="products">
-      <div class="sh"><span class="n">06</span><h2>Products, prices, and stock</h2></div>
+      <div class="sh"><span class="n">05</span><h2>Products, prices, and stock</h2></div>
       <p>Products live under <span class="mono" style="color:var(--amber)">Commerce &rarr; Products</span>.
         Adding or changing one is a form, not a code change.</p>
       <ul class="plain">
@@ -286,10 +278,10 @@
     </section>
 
     <section class="kblk" id="content">
-      <div class="sh"><span class="n">07</span><h2>Pages, photos, and the homepage</h2></div>
+      <div class="sh"><span class="n">06</span><h2>Pages, photos, and the homepage</h2></div>
       <p>Text and images across the site are "entries" in Craft, editable in a normal editor --
         headings, paragraphs, photos, links. You do not need a developer to fix a typo, swap a
-        photo, update opening hours, or write a news post. If the new design (section 08) is built
+        photo, update opening hours, or write a news post. If the new design (section 07) is built
         with editable regions, even the homepage banner and product blurbs are yours to change.</p>
       <div class="box">
         <h4>Ask the installer for this</h4>
@@ -300,7 +292,7 @@
     </section>
 
     <section class="kblk" id="install">
-      <div class="sh"><span class="n">08</span><h2>The one-time install</h2></div>
+      <div class="sh"><span class="n">07</span><h2>The one-time install</h2></div>
       <p>This is the only part that needs a developer, and only once. It has two halves: the new
         look, and the plugins. Give this whole section to whoever you hire.</p>
       <h3 class="sub">The new design (already built)</h3>
@@ -323,9 +315,10 @@
         <thead><tr><th>Plugin</th><th>What it does</th><th class="num">Cost</th></tr></thead>
         <tbody>
           <tr><td><code>commerce-stripe</code></td><td>Card, iDEAL, Apple/Google Pay through Stripe</td><td class="num">Free</td></tr>
+          <tr><td><code>commerce-mollie</code> <span style="color:var(--zinc)">(alternative)</span></td><td>Cards + iDEAL through Mollie instead of Stripe (section 03)</td><td class="num">Free</td></tr>
           <tr><td>Manual gateway</td><td>Bank-transfer / invoice payments</td><td class="num">Built in</td></tr>
-          <tr><td>Native shipping</td><td>Zone-based shipping prices (section 03)</td><td class="num">Built in</td></tr>
-          <tr><td><code>verbb/postie</code> <span style="color:var(--zinc)">(optional)</span></td><td>Live FedEx/UPS/PostNL/DPD rates</td><td class="num">Free</td></tr>
+          <tr><td>Native shipping</td><td>Zone-based shipping prices (section 02)</td><td class="num">Built in</td></tr>
+          <tr><td><code>verbb/postie</code> <span style="color:var(--zinc)">(optional)</span></td><td>Live FedEx/UPS/PostNL/DPD rates</td><td class="num">$79 + $39/yr</td></tr>
         </tbody>
       </table></div>
       <div class="copybox">
@@ -340,10 +333,12 @@ php craft plugin/install postie</code></pre>
     </section>
 
     <section class="kblk" id="hire">
-      <div class="sh"><span class="n">09</span><h2>Hiring for the install -- at a fixed price</h2></div>
+      <div class="sh"><span class="n">08</span><h2>Hiring for the install -- at a fixed price</h2></div>
       <p>The point of a fixed scope is that any competent Craft freelancer can quote it as a job
-        with a number and an end date. Send the message below to two or three Craft developers (the
-        Craft community keeps a directory of them) and compare quotes.</p>
+        with a number and an end date. The official directory at
+        <a href="https://craftcms.com/partners">craftcms.com/partners</a> lists a couple hundred
+        agencies and freelancers -- filter to Europe and "Commerce Verified". Send the message below
+        to two or three of them and compare quotes.</p>
       <div class="copybox">
         <div class="cb-h"><span>Request for quote -- paste and send</span><button data-copy="rfq">Copy</button></div>
         <pre id="rfq">Subject: Fixed-price Craft Commerce job -- new theme + payment/shipping setup
@@ -360,14 +355,18 @@ quote for a one-time job:
    pages. Make homepage sections, product text and images editable from the
    control panel.
 
-2. Install and connect the Stripe gateway (cards + iDEAL) and the built-in
-   Manual gateway for bank transfer. We will supply the Stripe keys.
+2. Install and connect the payment gateway -- Stripe or Mollie, we will confirm
+   which (cards + iDEAL) -- and the built-in Manual gateway for bank transfer.
+   We will supply the API keys.
 
 3. Confirm our zone-based shipping and VAT are configured (we can also do this
    ourselves -- please leave it owner-editable).
 
 4. Optional line item: install the Postie plugin for live carrier rates -- quote
    separately.
+
+Acceptance: the job is done when a full test order has been placed, paid, and
+refunded end to end on the new theme.
 
 Please send: a fixed price, a timeline, and what you would need from us to
 start. We maintain the site ourselves after handover, so no ongoing contract is
@@ -385,7 +384,7 @@ Radical Design</pre>
     </section>
 
     <section class="kblk" id="golive">
-      <div class="sh"><span class="n">10</span><h2>Go-live checklist</h2></div>
+      <div class="sh"><span class="n">09</span><h2>Go-live checklist</h2></div>
       <p>Work top to bottom. The first block is yours; the install block is the freelancer's.</p>
       <h3 class="sub">You (in the control panel)</h3>
       <ul class="check">
@@ -407,7 +406,7 @@ Radical Design</pre>
     </section>
 
     <section class="kblk" id="truth">
-      <div class="sh"><span class="n">11</span><h2>What still needs a developer -- honestly</h2></div>
+      <div class="sh"><span class="n">10</span><h2>What still needs a developer -- honestly</h2></div>
       <p>So you go in clear-eyed: a self-hosted Craft site is not zero-maintenance. A few things sit
         outside the control panel.</p>
       <ul class="plain">
